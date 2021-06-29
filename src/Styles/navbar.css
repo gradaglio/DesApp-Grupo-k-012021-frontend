@@ -1,0 +1,69 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+body{
+    background: #fffffa;
+}
+
+img{
+    vertical-align: middle;
+    border-style: none;
+    width: 115px;
+    margin-block: -12x;
+}
+
+.headerNavbar{
+    width: 100%;
+    overflow: hidden;
+    background: white;
+    margin-bottom: 20px;
+    background-size: cover;
+}
+
+
+
+.wrapper{
+    width: 90%;
+    max-width: 1000px;
+    margin:auto;
+    overflow: hidden;
+}
+
+.logo{
+    line-height: 3px;
+    float: left;
+    margin-top: 10px;   
+    width: 166px;
+    
+}
+
+#image{
+    width: 150px;
+}
+
+#buttonNavbar{
+    color: white;
+    
+    background: #062d68fa;
+}
+
+#salir{
+    color: white;
+}
+
+.nav{
+    float: right;
+    line-height: 30px;
+    margin: -37px;
+    margin-top: -28px
+}
+
+#buttonNavbarSalir{
+    background:#f8fbc6 ;
+    margin-right: 41px;
+    margin-top: -30px;
+    color: #062d68fa;
+}
+

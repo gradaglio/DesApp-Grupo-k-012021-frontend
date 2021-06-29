@@ -1,0 +1,37 @@
+.background{
+    background: url('../Images/fondoInitialPage.jpg');
+    height: 663px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+    
+}
+
+.backgroundCard{
+    background: rgb(228, 241, 200);
+    
+}
+
+#button{
+    color: black;
+    text-decoration: none;
+    background: #062d68fa;
+    padding: .75rem 1.25rem;
+    margin-bottom: auto;
+    
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    color: whitesmoke;
+    text-align: left;
+}
+
+.card{
+    vertical-align: center;
+}
+
+.body{
+    padding: 0.5rem 1.2rem 0.1rem 2rem;
+}
+
+.select{
+    margin-top: 8%;
+}

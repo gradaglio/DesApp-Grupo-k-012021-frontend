@@ -1,0 +1,6 @@
+.backgroundMM{
+    background: url('../Images/fondoPeliculas.jpg');
+    height: 663px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}

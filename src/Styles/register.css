@@ -1,0 +1,37 @@
+.backgroundRegister{
+    background: url('../Images/fondoInitialPageNegative.jpg');
+    height: 663px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+    
+}
+
+.backgroundCardR{
+    background: rgb(230, 223, 167);
+    
+}
+
+#button{
+    color: black;
+    text-decoration: none;
+    background: #062d68fa;
+    padding: .75rem 1.25rem;
+    margin-bottom: auto;
+    
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    color: whitesmoke;
+    text-align: left;
+}
+
+.card{
+    vertical-align: center;
+}
+
+.select{
+    margin-top: 8%;
+}
+
+.body{
+    padding: 0.5rem 1.2rem 0.1rem 2rem;
+}
