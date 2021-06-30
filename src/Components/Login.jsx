@@ -13,17 +13,14 @@ class Login extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-          email: '',
           password: '',
           plataforma: '',
           idiom:'',
           error: {},
         };
         this.login = this.login.bind(this);
-        this.changeEmail = this.changeEmail.bind(this);
         this.changePassword = this.changePassword.bind(this);
         this.changePlatform = this.changePlatform.bind(this);
-        this.validateEmail = this.validateEmail.bind(this);
         this.validatePassword = this.validatePassword.bind(this);
         this.validatePlatform = this.validatePlatform.bind(this);
         this.validateForm = this.validateForm.bind(this);
@@ -38,10 +35,6 @@ class Login extends React.Component{
     componentDidMount(){
         console.log(this.props)
     }
-
-    changeEmail(event) {
-        this.setState({ email: event.target.value });
-    }
     
     changePassword(event) {
         this.setState({ password: event.target.value })
@@ -49,10 +42,6 @@ class Login extends React.Component{
 
     changePlatform(event) {
         this.setState({ platform: event.target.value })
-    }
-
-    validateEmail(){
-        return !(this.state.email.includes('@') && this.state.email.includes(".com"))
     }
     
     validatePassword(){
@@ -65,10 +54,6 @@ class Login extends React.Component{
       
     validateForm(){
         let newError = {}
-    
-        if(this.validateEmail()){
-          newError["email"] = "Utilice un mail valido!"
-        }
     
         if(this.validatePassword()){
           newError["password"] = "Deber tener una contraseña!"
@@ -85,8 +70,8 @@ class Login extends React.Component{
 
     login() {
         if(this.validateForm()){
-          AuthService.authenticate({email: this.state.email, password: this.state.password, platform: this.state.platform}).then((res) => {
-            localStorage.setItem("user", JSON.stringify(res));
+          AuthService.authenticate({password: this.state.password, clientPlatformName: this.state.platform}).then((res) => {
+            localStorage.setItem("client", JSON.stringify(res));
             this.props.history.push('/mainMenu');
           }).catch(e => {
             if(e.error.status === 404 || e.error.status === 400){
@@ -133,16 +118,14 @@ class Login extends React.Component{
                                     Login
                                 </h2>
                                 <Form className="pt-3 ">
-                                    <Form.Group controlId="formBasicEmail">
-                                        <Form.Label>Email</Form.Label>
-                                        <Form.Control 
-                                            type="email" 
-                                            //placeholder= {useTranslation("Escriba el email de registro" )}
-                                            isInvalid={!!this.state.error.email} 
-                                            value={this.state.email} 
-                                            onChange={(event) => this.changeEmail(event)}
+                                    <Form.Group controlId="formGridPlatform">
+                                        <Form.Label>Plataforma</Form.Label>
+                                        <Form.Control  
+                                            placeholder="Escriba la plataforma de registro"
+                                            name="platform"
+                                            onChange={(event) => this.changePlatform(event)}
+                                            value={this.state.platform}
                                         />
-                                        <Form.Control.Feedback type="invalid">{this.state.error.email}</Form.Control.Feedback>
                                     </Form.Group>
                                     <Form.Group controlId="formBasicPassword">
                                         <Form.Label>Password</Form.Label>
@@ -154,17 +137,6 @@ class Login extends React.Component{
                                             onChange={(event) => this.changePassword(event)}
                                         />
                                         <Form.Control.Feedback type="invalid">{this.state.error.password}</Form.Control.Feedback>
-                                    </Form.Group>
-                                    <Form.Group controlId="formGridPlatform">
-                                        <Form.Label>Plataforma</Form.Label>
-                                        <Form.Control  
-                                            placeholder="Escriba la plataforma de registro"
-                                            name="platform"
-                                            onChange={(event) => this.changePlatform(event)}
-                                            value={this.state.platform}
-                                        />
-                                            
-                                       
                                     </Form.Group>
                                     <Button id="button" variant="primary" onClick={(event) => this.login()}>
                                         Ingresar

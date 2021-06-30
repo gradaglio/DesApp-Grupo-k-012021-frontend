@@ -6,7 +6,7 @@ class AuthService{
 
     authenticate(messageBody){
         const options = {
-            url: this.urlBase + "/auth",
+            url: this.urlBase + "//clientPlatform/login",
             body: messageBody,
             json: true,
         };

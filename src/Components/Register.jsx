@@ -75,15 +75,18 @@ class Register extends React.Component {
 
     register() {
         if(this.validateForm()){
-            ClientService.createClient({email: this.state.email, password: this.state.password, platform: this.state.platform})
+            ClientService.registerClient({contactMail: this.state.email, password: this.state.password, clientPlatformName: this.state.platform})
             .then((res) => { 
+                console.log("entra")
                 this.props.history.push('/')
                 })
             .catch(e => {
+                console.log("entra en error")
                 if(e.error.status === 409){
                     console.log('El email ya fue registrado!');
                 }
             })
+            console.log("no entra en nada")
         }
     }
 
@@ -125,6 +128,17 @@ class Register extends React.Component {
                                         Registro
                                     </h2>
                                     <Form className="pt-3">
+                                        <Form.Group controlId="formGridPlatform">
+                                            <Form.Label>Plataforma</Form.Label>
+                                            <Form.Control 
+                                                placeholder="Escribe la plataforma"
+                                                name="platform"
+                                                onChange={(event) => this.changePlatform(event)}
+                                                value={this.state.platform}
+                                                //isInvalid={!!this.state.errores.platform}
+                                                //isValid={this.validateCamposVacios('platform')}
+                                            />
+                                        </Form.Group>
                                         <Form.Group controlId="formBasicEmail">
                                             <Form.Label>Email</Form.Label>
                                             <Form.Control 
@@ -147,19 +161,6 @@ class Register extends React.Component {
                                             />
                                             <Form.Control.Feedback type="invalid">{this.state.error.password}</Form.Control.Feedback>
                                         </Form.Group>
-                                        <Form.Group controlId="formGridPlatform">
-                                                <Form.Label>Plataforma</Form.Label>
-                                                <Form.Control 
-                                                    placeholder="Escribe la plataforma"
-                                                    name="platform"
-                                                    onChange={(event) => this.changePlatform(event)}
-                                                    value={this.state.platform}
-                                                    //isInvalid={!!this.state.errores.platform}
-                                                    //isValid={this.validateCamposVacios('platform')}
-                                                />
-                                                    
-                                               
-                                            </Form.Group>
                                         <Button id="button" variant="primary" onClick={(event) => this.register()}>
                                             Crear
                                         </Button>
