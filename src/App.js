@@ -10,9 +10,9 @@ import MainMenu from './Components/MainMenu';
 import Root from './Components/Roots';
 import { withNamespaces } from 'react-i18next';
 
-/*function App ({ t }) {
-  return <h1>{t('Welcome to React')}</h1>
-}*/
+// function App ({ t }) {
+//   return <h1>{t('Welcome to React')}</h1>
+// }
 
 
 class App extends React.Component {
@@ -25,8 +25,10 @@ class App extends React.Component {
   }
 
   render() { 
+    const {t} = this.props;
 
     return  (
+      //<h1> { t("Registro")}</h1>
       <BrowserRouter> 
         <Switch>
           <Route exact path='/mainMenu' render={(props) => <MainMenu {...props}/>}/>
@@ -42,6 +44,6 @@ class App extends React.Component {
 
 
 
-//export default withNamespaces(App);
+export default withNamespaces()(App);
 
-export default App;
+//export default App;

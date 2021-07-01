@@ -2,10 +2,10 @@ import React from 'react';
 import '../Styles/register.css';
 import { Form, Button, Card, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import ClientService from '../Services/ClientService'
-//import { ToastContainer, toast } from 'react-toastify';
+import clientService from '../Services/ClientService'
 import 'react-toastify/dist/ReactToastify.css';
 import resenia from '../Images/re-senia_adobespark.png';
+import { withNamespaces } from 'react-i18next';
 
 
 class Register extends React.Component {
@@ -75,7 +75,7 @@ class Register extends React.Component {
 
     register() {
         if(this.validateForm()){
-            ClientService.createClient({email: this.state.email, password: this.state.password, platform: this.state.platform})
+             clientService.createClient({email: this.state.email, password: this.state.password, platform: this.state.platform})
             .then((res) => { 
                 this.props.history.push('/')
                 })
@@ -91,6 +91,7 @@ class Register extends React.Component {
 
   
     render() { 
+        const {t} = this.props;
         return  (
             <div>
                 <div>
@@ -122,14 +123,14 @@ class Register extends React.Component {
                                         Re-seña
                                     </h1>
                                     <h2 style={{textAlign: 'center'}}>
-                                        Registro
+                                        {t("Registro")}
                                     </h2>
                                     <Form className="pt-3">
                                         <Form.Group controlId="formBasicEmail">
                                             <Form.Label>Email</Form.Label>
                                             <Form.Control 
                                                 type="email" 
-                                                placeholder="Escriba el email de registro" 
+                                                placeholder={t("Escriba el email de registro")} 
                                                 value={this.state.email} 
                                                 onChange={(event) => this.changeEmail(event)}
                                                 //isInvalid={!!this.state.error.email} 
@@ -176,4 +177,4 @@ class Register extends React.Component {
     }
 }
 
-export default Register;
+export default withNamespaces()(Register);
