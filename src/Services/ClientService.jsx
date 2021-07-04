@@ -2,23 +2,18 @@ import rp from 'request-promise'
 
 class ClientService{
 
-    urlBase = "http://localhost:8080/re-senia";
-
-    createClient(messageBody){
+    urlBase = "localhost:8080/re-senia";
+    
+    registerClient(messageBody){
+        console.log('email: ' + messageBody.email)
+        console.log('platform: ' + messageBody.platform)
+        console.log('password: ' + messageBody.password)
         const options = {
-            url: this.urlBase + "/clientPlatform",
+            url: this.urlBase + "/clientPlatform/register",
             body: messageBody,
             json: true,
         };
-        return rp.post(options)
-    }
-
-    postClient(messageBody){
-        const options = {
-            url: this.urlBase + "/clientPlatform",
-            body: messageBody,
-            json: true,
-        };
+        console.log("sale")
         return rp.post(options)
     }
 

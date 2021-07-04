@@ -4,7 +4,10 @@
   "Escriba el password de registro": "Enter the registration password",
   "Plataforma": "Platform",
   "Escribe la plataforma de registro": "Enter the registration platform",
+  "Escribe la plataforma": "Enter the platform",
   "Ingresar": "Login",
+  "No tenes cuenta?": "Don't you have an account?",
   "Click aquí": "Click here",
-  "Crear": "Create"
+  "Crear": "Create",
+  "Ya tienes cuenta?":"Do you already have an account?"
 }

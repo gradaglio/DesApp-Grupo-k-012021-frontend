@@ -50,22 +50,22 @@ class Register extends React.Component {
     }
 
     validatePlatform(){
-        return this.state.platform === 'Seleccione una plataforma';
+        return this.state.platform === '';
     }
       
     validateForm(){
         let newError = {}
     
         if(this.validateEmail()){
-          newError["email"] = "Utilice un mail valido!"
+          newError["email"] = "Debe utilizar un mail válido!"
         }
     
         if(this.validatePassword()){
-          newError["password"] = "Deber tener una contraseña!"
+          newError["password"] = "Deber escribir una contraseña!"
         }
 
         if(this.validatePlatform()){
-            newError["platform"] = "Debe seleccionar una plataforma!"
+            newError["platform"] = "Debe escribir una plataforma!"
         }
     
         this.setState({error: newError})
@@ -75,21 +75,21 @@ class Register extends React.Component {
 
     register() {
         if(this.validateForm()){
-             clientService.createClient({email: this.state.email, password: this.state.password, platform: this.state.platform})
+            clientService.registerClient({email: this.state.email, password: this.state.password, platform: this.state.platform})
             .then((res) => { 
+                console.log("entra")
                 this.props.history.push('/')
                 })
             .catch(e => {
+                console.log("entra en error")
                 if(e.error.status === 409){
                     console.log('El email ya fue registrado!');
                 }
             })
+            console.log("no entra en nada")
         }
     }
 
-  
-
-  
     render() { 
         const {t} = this.props;
         return  (
@@ -126,6 +126,17 @@ class Register extends React.Component {
                                         {t("Registro")}
                                     </h2>
                                     <Form className="pt-3">
+                                        <Form.Group controlId="formGridPlatform">
+                                            <Form.Label>Plataforma</Form.Label>
+                                            <Form.Control 
+                                                placeholder={t("Escribe la plataforma")}
+                                                name="platform"
+                                                onChange={(event) => this.changePlatform(event)}
+                                                value={this.state.platform}
+                                                isInvalid={!!this.state.error.platform}
+                                            />
+                                            <Form.Control.Feedback type="invalid">{this.state.error.platform}</Form.Control.Feedback>
+                                        </Form.Group>
                                         <Form.Group controlId="formBasicEmail">
                                             <Form.Label>Email</Form.Label>
                                             <Form.Control 
@@ -133,7 +144,7 @@ class Register extends React.Component {
                                                 placeholder={t("Escriba el email de registro")} 
                                                 value={this.state.email} 
                                                 onChange={(event) => this.changeEmail(event)}
-                                                //isInvalid={!!this.state.error.email} 
+                                                isInvalid={!!this.state.error.email} 
                                             />
                                             <Form.Control.Feedback type="invalid">{this.state.error.email}</Form.Control.Feedback>
                                         </Form.Group>
@@ -141,31 +152,18 @@ class Register extends React.Component {
                                             <Form.Label>Password</Form.Label>
                                             <Form.Control 
                                                 type="password" 
-                                                placeholder="Escriba el password de registro" 
+                                                placeholder={t("Escriba el password de registro")} 
                                                 value={this.state.password} 
                                                 onChange={(event) => this.changePassword(event)}
-                                                //isInvalid={!!this.state.error.password} 
+                                                isInvalid={!!this.state.error.password} 
                                             />
                                             <Form.Control.Feedback type="invalid">{this.state.error.password}</Form.Control.Feedback>
                                         </Form.Group>
-                                        <Form.Group controlId="formGridPlatform">
-                                                <Form.Label>Plataforma</Form.Label>
-                                                <Form.Control 
-                                                    placeholder="Escribe la plataforma"
-                                                    name="platform"
-                                                    onChange={(event) => this.changePlatform(event)}
-                                                    value={this.state.platform}
-                                                    //isInvalid={!!this.state.errores.platform}
-                                                    //isValid={this.validateCamposVacios('platform')}
-                                                />
-                                                    
-                                               
-                                            </Form.Group>
                                         <Button id="button" variant="primary" onClick={(event) => this.register()}>
                                             Crear
                                         </Button>
                                         <br/>
-                                        Ya tienes cuenta? <Link to={'/'}>Click aquí</Link>
+                                        {t("Ya tienes cuenta?")} <Link to={'/'}>{t("Click aquí")}</Link>
                                     </Form>
                                 </Card.Body>
                             </Card>
