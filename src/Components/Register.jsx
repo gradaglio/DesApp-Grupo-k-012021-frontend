@@ -76,7 +76,7 @@ class Register extends React.Component {
 
     register() {
         if(this.validateForm()){
-            clientService.registerClient({email: this.state.email, password: this.state.password, platform: this.state.platform})
+            clientService.registerClient({contactMail: this.state.email, password: this.state.password, clientPlatformName: this.state.platform})
             .then((res) => { 
                 console.log("entra")
                 this.props.history.push('/')
