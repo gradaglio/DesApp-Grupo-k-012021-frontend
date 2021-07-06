@@ -6,7 +6,7 @@ import AuthService from '../Services/AuthService';
 import image from '../Images/re-senia_adobespark.png'
 import resenia from '../Images/re-senia_adobespark.png';
 import i18n from '../i18n.js';
-import { withNamespaces, changeLenguage } from 'react-i18next';
+import { withNamespaces} from 'react-i18next';
 
 class Login extends React.Component{
 
@@ -29,11 +29,16 @@ class Login extends React.Component{
 
     changeIdiom(event){
         let idiom =this.setState({ idiom: event.target.value });
-        if (idiom === "English"){
-            i18n.changeLenguage="en"
-        }else{
-            i18n.changeLenguage="es"
-        }
+        // if (idiom === "English"){
+        //     i18n.changeLenguage="en"
+        // }else{
+        //     i18n.changeLenguage="es"
+        // }
+        //let newIdiom = this.state.idiom;
+        //newIdiom[e.target.name] = e.target.value
+        console.log('idioma: '+ idiom)
+        i18n.changeLenguage = (idiom)
+        
         
     }
 
@@ -44,6 +49,7 @@ class Login extends React.Component{
 
     changeEmail(event) {
         this.setState({ email: event.target.value });
+        console.log('email: ' + this.setState({ email: event.target.value }) )
     }
     
     changePassword(event) {
@@ -99,9 +105,11 @@ class Login extends React.Component{
                             <Form.Group as={Row}>
                                 <img src={resenia} alt="description"/>
                                 <Form.Group controlId="formGridIdioma" className = "offset-9">
-                                    <Form.Control as="select" className="select"
+                                    <Form.Control as="select"
+                                        name="idioma"
                                         onChange = {(event) => this.changeIdiom(event)}
-                                        value={this.state.idioma}
+                                        value={this.state.idiom}
+                                        placeholder="Selecciona el tipo de proceso"
                                     >
                                         <option>English</option>
                                         <option>Español</option>

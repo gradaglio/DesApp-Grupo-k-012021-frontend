@@ -2,7 +2,7 @@ import rp from 'request-promise'
 
 class ClientService{
 
-    urlBase = "localhost:8080/re-senia";
+    urlBase = "http://localhost:8080/re-senia";
     
     registerClient(messageBody){
         console.log('email: ' + messageBody.email)
