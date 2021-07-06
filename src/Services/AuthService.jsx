@@ -10,7 +10,7 @@ class AuthService{
             body: messageBody,
             json: true,
         };
-        return rp.post(options)
+        return rp.put(options)
     }
 
 }

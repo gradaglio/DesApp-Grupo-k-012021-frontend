@@ -7,6 +7,7 @@ import image from '../Images/re-senia_adobespark.png'
 import resenia from '../Images/re-senia_adobespark.png';
 import i18n from '../i18n.js';
 import { withNamespaces} from 'react-i18next';
+//import { ToastContainer, toast } from 'react-toastify';
 
 class Login extends React.Component{
 
@@ -14,15 +15,15 @@ class Login extends React.Component{
         super(props);
         this.state = {
           password: '',
-          email: '',
+          platform: '',
           idiom:'',
           error: {},
         };
         this.login = this.login.bind(this);
-        this.changeEmail = this.changeEmail.bind(this);
+        this.changePlatform = this.changePlatform.bind(this);
         this.changePassword = this.changePassword.bind(this);
         this.validatePassword = this.validatePassword.bind(this);
-        this.validateEmail = this.validateEmail.bind(this);
+        this.validatePlatform = this.validatePlatform.bind(this);
         this.validateForm = this.validateForm.bind(this);
         this.changeIdiom = this.changeIdiom.bind(this);
     }
@@ -47,9 +48,9 @@ class Login extends React.Component{
         console.log(this.props)
     }
 
-    changeEmail(event) {
-        this.setState({ email: event.target.value });
-        console.log('email: ' + this.setState({ email: event.target.value }) )
+    changePlatform(event) {
+        this.setState({ platform: event.target.value });
+        //console.log('email: ' + this.setState({ email: event.target.value }) )
     }
     
     changePassword(event) {
@@ -60,12 +61,10 @@ class Login extends React.Component{
         return this.state.password === '';
     }
 
-    validateEmail(){
-        return !(this.state.email.includes('@') && this.state.email.includes(".com"))
+    validatePlatform(){
+        return this.state.platform === '';
     }
-
   
-      
     validateForm(){
         let newError = {}
     
@@ -73,24 +72,21 @@ class Login extends React.Component{
             newError["password"] = "Deber escribir una contraseña!"
         }
 
-        if(this.validateEmail()){
-            newError["email"] = "Debe utilizar un mail válido!"
+        if(this.validatePlatform()){
+            newError["platform"] = "Deber escribir una plataforma!"
         }
 
         this.setState({error: newError})
         return Object.keys(newError).length === 0
     }
-    
 
     login() {
         if(this.validateForm()){
-          AuthService.authenticate({password: this.state.password, clientPlatformName: this.state.platform}).then((res) => {
+          AuthService.authenticate({password: this.state.password, clientPlatformName: this.state.platform.toLowerCase()}).then((res) => {
             localStorage.setItem("client", JSON.stringify(res));
             this.props.history.push('/mainMenu');
           }).catch(e => {
-            if(e.error.status === 404 || e.error.status === 400){
-              this.notifyError('Usuario y/o contraseña incorrectos');
-            }
+            console.log("usuario o contraseña incorrecto")
           })
         }
     }
@@ -131,16 +127,16 @@ class Login extends React.Component{
                                     Login
                                 </h2>
                                 <Form className="pt-3 ">
-                                <Form.Group controlId="formBasicEmail">
-                                    <Form.Label>Email</Form.Label>
+                                <Form.Group controlId="formBasicPlatform">
+                                    <Form.Label>Platform</Form.Label>
                                     <Form.Control 
-                                        type="email" 
-                                        placeholder={t("Escriba el email de registro")} 
-                                        value={this.state.email} 
-                                        onChange={(event) => this.changeEmail(event)}
-                                        isInvalid={!!this.state.error.email} 
+                                        type="Platform" 
+                                        placeholder={t("Escriba la plataforma de registro")} 
+                                        value={this.state.platform} 
+                                        onChange={(event) => this.changePlatform(event)}
+                                        isInvalid={!!this.state.error.platform} 
                                     />
-                                    <Form.Control.Feedback type="invalid">{this.state.error.email}</Form.Control.Feedback>
+                                    <Form.Control.Feedback type="invalid">{this.state.error.platform}</Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group controlId="formBasicPassword">
                                     <Form.Label>Password</Form.Label>

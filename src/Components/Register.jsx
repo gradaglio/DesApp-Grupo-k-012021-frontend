@@ -76,13 +76,11 @@ class Register extends React.Component {
 
     register() {
         if(this.validateForm()){
-            clientService.registerClient({contactMail: this.state.email, password: this.state.password, clientPlatformName: this.state.platform})
+            clientService.registerClient({contactMail: this.state.email, password: this.state.password, clientPlatformName: this.state.platform.toLowerCase()})
             .then((res) => { 
-                console.log("entra")
                 this.props.history.push('/')
                 })
             .catch(e => {
-                console.log("entra en error")
                 if(e.error.status === 409){
                     console.log('El email ya fue registrado!');
                 }
